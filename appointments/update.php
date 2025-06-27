@@ -31,8 +31,6 @@ $appointment = array_filter($appointments, fn($a) => $a['id'] == $id)[0];
 
 <h2>Edit Appointment</h2>
 <form method="POST">
-    Tanggal & Waktu: <input type="datetime-local" name="scheduled_at" value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($appointment['scheduled_at']))) ?>"><br>
-    Tujuan: <input type="text" name="purpose" value="<?= htmlspecialchars($appointment['purpose']) ?>"><br>
     Status: 
     <select name="status">
         <option value="pending" <?= $appointment['status'] == 'pending' ? 'selected' : '' ?>>Pending</option>
