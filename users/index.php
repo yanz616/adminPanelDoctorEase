@@ -1,10 +1,11 @@
 <?php
 include '../includes/auth.php';
+include '../includes/config.php';
 
 // Ambil data user dari API
 $opts = ['http' => ['header' => "Authorization: Bearer {$_SESSION['token']}"]];
 $context = stream_context_create($opts);
-$response = file_get_contents("http://127.0.0.1:8000/api/admin/users", false, $context);
+$response = file_get_contents(API_BASE_URL . "/api/admin/users", false, $context);
 $users = json_decode($response, true);
 ?>
 

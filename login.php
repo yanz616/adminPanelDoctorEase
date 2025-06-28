@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+include __DIR__ . '/includes/config.php';
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +40,7 @@
     ];
 
     $context = stream_context_create($opts);
-    $response = @file_get_contents('http://127.0.0.1:8000/api/login', false, $context);
+    $response = @file_get_contents(API_BASE_URL . "/api/login", false, $context);
 
     if ($response === false) {
       echo "<p class='text-danger mt-3'>Login gagal. Periksa email/password.</p>";
@@ -49,7 +52,7 @@
       $opts['http']['method'] = "GET";
       $opts['http']['header'] .= "\r\nAuthorization: Bearer {$data['token']}";
       $context = stream_context_create($opts);
-      $user = json_decode(file_get_contents('http://127.0.0.1:8000/api/user', false, $context), true);
+      $user = json_decode(file_get_contents(API_BASE_URL . "/api/user", false, $context), true);
 
       if ($user['is_admin']) {
         $_SESSION['is_admin'] = true;

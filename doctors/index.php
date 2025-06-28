@@ -1,5 +1,6 @@
 <?php
 include '../includes/auth.php';
+include __DIR__ . '/../includes/config.php';
 
 // Ambil data dokter
 $opts = [
@@ -8,7 +9,7 @@ $opts = [
     ]
 ];
 $context = stream_context_create($opts);
-$response = file_get_contents("http://127.0.0.1:8000/api/admin/doctors", false, $context);
+$response = file_get_contents(API_BASE_URL . "/api/admin/doctors", false, $context);
 $doctors = json_decode($response, true);
 ?>
 

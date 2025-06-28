@@ -1,5 +1,6 @@
 <?php
 include '../includes/auth.php';
+include __DIR__ . '/../includes/config.php';
 
 $id = $_GET['id'];
 
@@ -10,7 +11,7 @@ $opts = [
     ]
 ];
 $context = stream_context_create($opts);
-file_get_contents("http://127.0.0.1:8000/api/admin/appointments/$id", false, $context);
+file_get_contents(API_BASE_URL . "/api/admin/appointments/$id", false, $context);
 
 // ⬇️ Redirect setelah delete
 header("Location: index.php");

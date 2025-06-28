@@ -1,9 +1,10 @@
 <?php
 include '../includes/auth.php';
+include __DIR__ . '/../includes/config.php';
 
 $opts = ['http' => ['header' => "Authorization: Bearer {$_SESSION['token']}"]];
 $context = stream_context_create($opts);
-$response = file_get_contents("http://127.0.0.1:8000/api/admin/appointments", false, $context);
+$response = file_get_contents(API_BASE_URL . "/api/admin/appointments", false, $context);
 $appointments = json_decode($response, true);
 ?>
 

@@ -1,5 +1,6 @@
 <?php
 include '../includes/auth.php';
+include __DIR__ . '/../includes/config.php';
 
 $id = $_GET['id'] ?? null;
 
@@ -24,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
     $context = stream_context_create($opts);
 
-    $response = file_get_contents("http://127.0.0.1:8000/api/admin/doctors/$id", false, $context);
+    $response = file_get_contents(API_BASE_URL . "/api/admin/doctors/$id", false, $context);
 
-    header("Location: doctor.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -37,7 +38,7 @@ $opts = [
     ]
 ];
 $context = stream_context_create($opts);
-$response = file_get_contents("http://127.0.0.1:8000/api/admin/doctors/$id", false, $context);
+$response = file_get_contents(API_BASE_URL . "/api/admin/doctors/$id", false, $context);
 $doctor = json_decode($response, true);
 
 // Jika dokter tidak ditemukan
